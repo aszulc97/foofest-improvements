@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Cuprum:wght@700&family=Lato:wght@300;400&display=swap");
+
+// reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+$background-gradient: linear-gradient(
+  25deg,
+  rgba(255, 216, 152, 0.5270483193277311) 0%,
+  rgba(247, 252, 252, 0.1881127450980392) 76%,
+  rgba(207, 246, 244, 1) 100%
+);
+$primary-color: #2f5061;
+$accent-color: #e57812;
+$midgard-color: #e4a3c8;
+$vanaheim-color: #7cc7cf;
+$jotunheim-color: #ffad7d;
+
+$logo-font: "Bangers", cursive;
+$headers-font: "Cuprum", sans-serif;
+$paragraph-font: "Lato", sans-serif; //weight 400 - regular, 300 - light

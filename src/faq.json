@@ -1,0 +1,63 @@
+[
+  {
+    "id": 0,
+    "question": "Can I return a ticket?",
+    "answer": "Yes, to do so please contact us via e-mail: foo@fest.dk."
+  },
+
+  { "id": 1, "question": "Can I buy a ticket only for one day?", "answer": "No, all our tickets are for a whole week period." },
+
+  {
+    "id": 2,
+    "question": "I would like to upgrade my regular ticket to VIP. Is it possible?",
+    "answer": "Yes, to do so please contact us via e-mail: foo@fest.dk."
+  },
+
+  {
+    "id": 3,
+    "question": "Do I have to bring a printed out version of my ticket to the festival?",
+    "answer": "This is not necessary. We can scan all tickets from your phone."
+  },
+
+  {
+    "id": 4,
+    "question": "Can someone else use my ticket even though my name is on there?",
+    "answer": "No, the personal data has to be the same as in a ticket owner’s ID. If you want to change the name on the ticket, please contact us via e-mail: foo@fest.dk."
+  },
+
+  {
+    "id": 5,
+    "question": "Can I buy a ticket at the entrance?",
+    "answer": "There are no tickets available at the entrance. You can only get a ticket on our website."
+  },
+
+  {
+    "id": 6,
+    "question": "How big are your camping sites?",
+    "answer": ["Svartheim: 400 spots", "Nilfheim: 300 spots", "Helheim: 100 spots", "Muspelheim: 200 spots", "Alfheim: 250 spots"]
+  },
+
+  {
+    "id": 7,
+    "question": "What measures are required to participate in Foofest 2022 in the context of the COVID-19 pandemic, and will the participation in the festival be conditioned by vaccination?",
+    "answer": "For the health and safety of Participants, the Event Organizer may request evidence to confirm that their health allows them to participate in the Festival, will be able to apply health verification measures (by means of rapid testing, temperature taking, scanning of the European Digital Certificate COVID-19, etc.) and to apply any measures required by the state authorities imposed event organizers depending on the evolution of the epidemiological situation."
+  },
+
+  {
+    "id": 8,
+    "question": "Where are the campsites located?",
+    "answer": "The campsite is right next to the festival site within walking distance."
+  },
+
+  {
+    "id": 9,
+    "question": "Will there be food for sale also during the night?",
+    "answer": "Yes, the camping shop will be open 24/7. The food trucks will close a few hours during the late night hours."
+  },
+
+  {
+    "id": 10,
+    "question": "Will there be drinkable tap water available?",
+    "answer": "Yes, on both the campsite and festival grounds there will be free tap water available. Please try not to waste any water!"
+  }
+]

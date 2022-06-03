@@ -1,0 +1,663 @@
+@use "base";
+
+body {
+  background: base.$background-gradient;
+  background-repeat: no-repeat;
+  color: base.$primary-color;
+  font-family: base.$paragraph-font;
+}
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+a,
+li {
+  color: base.$primary-color;
+  font-family: base.$headers-font;
+}
+.homeTitle {
+  padding: 4rem 0 0 0;
+  ~ p {
+    text-align: center;
+    max-width: 50vw;
+    font-size: 1.5rem;
+    margin: 1rem auto;
+  }
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .navFlexWrapper {
+    display: flex;
+    gap: 2rem;
+  }
+}
+
+nav a {
+  font-size: 1.3rem;
+}
+a.logo:hover,
+.navFlexWrapper a:hover,
+.navComponent a:hover,
+.link:hover,
+.thankyou a:hover {
+  color: base.$accent-color;
+}
+.primaryCTA a:hover {
+  color: white;
+}
+
+#welcomeImageBackground {
+  background-image: url("./fest1.webp");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 100vh;
+  nav ul {
+    padding: 2rem;
+  }
+}
+
+.opacityContainer {
+  height: 100vh;
+  background-color: rgb(255 255 255 / 69%);
+}
+
+.logo {
+  font-family: base.$logo-font;
+  color: base.$primary-color;
+  font-size: 3rem;
+}
+p.logo {
+  font-family: "Cuprum";
+  text-transform: uppercase;
+}
+span.logo {
+  font-size: 6rem;
+}
+
+.landingHeader {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+h1 {
+  padding: 2rem 0;
+  font-size: 3rem;
+  text-align: center;
+}
+
+h2 {
+  padding: 2rem 0 1rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+#countdownContainer {
+  text-align: center;
+  ~ p {
+    margin-top: 1rem;
+  }
+  *:first-child {
+    font-size: 6rem;
+    word-spacing: 30px;
+  }
+  h3 {
+    word-spacing: 50px;
+    padding-left: 1rem;
+  }
+  * {
+    font-size: 1.5rem;
+    font-family: base.$headers-font;
+  }
+}
+
+// BASKET
+.basketContainer {
+  margin-top: 80px;
+  padding: 2rem;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    li {
+      font-family: base.$paragraph-font;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        background-color: base.$primary-color;
+        color: #fff;
+        font-size: 1.5rem;
+        border-radius: 50px;
+        padding: 0.4rem 0.9rem;
+      }
+    }
+  }
+  .marginBottom {
+    margin-bottom: 2rem;
+    max-width: 400px;
+  }
+
+  .chooseTentContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+  }
+  section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    * {
+      place-self: center;
+    }
+    .primaryCTA {
+      margin: 1.5rem 0;
+    }
+    .personalData {
+      display: flex;
+      flex-direction: column;
+      // align-items: center;
+      // justify-content: center;
+      gap: 0.5rem;
+    }
+    .personalData div,
+    fieldset {
+      all: unset;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+
+      * {
+        place-self: flex-start;
+      }
+
+      label {
+        font-size: 0.8rem;
+      }
+      input {
+        margin-bottom: 0.5rem;
+        border: 1px solid #81818175;
+        border-radius: 5px;
+        padding: 0.3rem 0.5rem;
+        width: 300px;
+      }
+
+      legend {
+        margin-bottom: 0.2rem;
+      }
+      .flex {
+        display: flex;
+        position: relative;
+        input + span {
+          position: absolute;
+          right: 2rem;
+        }
+
+        input + span::before {
+          position: absolute;
+          right: -20px;
+          top: 5px;
+        }
+        input[type="email"] {
+          border: 2px solid rgba(129, 129, 129, 0.4588235294);
+        }
+
+        // input:not(:focus):invalid {
+        //   border: 2px solid red;
+        // }
+        input:not(:focus, :placeholder-shown):invalid {
+          border: 2px solid red;
+        }
+
+        input:not(:focus, :placeholder-shown):invalid + span::before {
+          content: "✖";
+          color: red;
+        }
+
+        input[type="email"]:not(:focus):valid + span::before {
+          content: "✓";
+          color: green;
+        }
+      }
+    }
+
+    .creditCard {
+      place-self: flex-start;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-bottom: 1rem;
+      div input {
+        margin: 0;
+        width: 145px;
+      }
+    }
+  }
+
+  button:disabled {
+    background-color: grey;
+  }
+  .selected {
+    font-weight: 600;
+  }
+
+  .notSelected {
+    opacity: 0.5;
+  }
+}
+
+// schedule
+.scheduleButtons {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 3rem;
+}
+
+.radioButton:hover {
+  background-color: #20b8be;
+}
+
+@media screen and (min-width: 1000px) {
+  .scheduleButtons {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.schedules {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.artistsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  padding: 0 2rem;
+  justify-items: center;
+  align-items: flex-start;
+}
+.styledPar {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+// INFO PAGE
+//source: https://codepen.io/nikkk-me/pen/abvPjeG
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+
+  .switch-button {
+    background: #2f506188;
+    border-radius: 30px;
+    overflow: hidden;
+    width: 400px;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: white;
+    position: relative;
+    padding-right: 200px;
+    position: relative;
+
+    &:before {
+      content: "FAQ";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    &-checkbox {
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 2;
+
+      &:checked + .switch-button-label:before {
+        transform: translateX(200px);
+        transition: transform 300ms linear;
+      }
+
+      & + .switch-button-label {
+        position: relative;
+        padding: 15px 0;
+        display: block;
+        user-select: none;
+        pointer-events: none;
+
+        &:before {
+          content: "";
+          background: base.$primary-color;
+          height: 100%;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          top: 0;
+          border-radius: 30px;
+          transform: translateX(0);
+          transition: transform 300ms;
+        }
+
+        .switch-button-label-span {
+          position: relative;
+        }
+      }
+    }
+  }
+}
+
+.questionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+}
+
+.singleQuestion {
+  width: 60%;
+  button {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+    align-items: center;
+    p {
+      padding: 1rem 0;
+    }
+  }
+  p {
+    padding-bottom: 1rem;
+  }
+}
+
+.openedQuestion {
+  font-weight: 900;
+}
+
+.rotateArrow {
+  transform: rotate(180deg);
+  transition-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.campsiteContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 20rem;
+  h3 {
+    padding: 0.5rem 0;
+  }
+  .campsiteInfo {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+    img {
+      width: 20%;
+    }
+    ul * {
+      list-style-type: disc;
+      padding-bottom: 0.2rem;
+      font-family: base.$paragraph-font;
+    }
+  }
+}
+
+.accomodationFeedback {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: rgba(255, 70, 70, 0.534);
+}
+
+// BASKET _TICKETS
+h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.stepTitle {
+  font-size: 1.4rem;
+}
+.emtyCart {
+  margin: 1.5rem 0;
+}
+.noMatch {
+  color: red;
+}
+
+.sumCartRow,
+.sumTotal {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  p {
+    padding: 0.2rem 0;
+  }
+  svg {
+    width: fit-content;
+  }
+}
+.sumTotal {
+  font-weight: 600;
+  border-top: 1px solid #2f506177;
+  padding-top: 0.5rem;
+}
+
+.cartRow {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  border-bottom: 1px solid #2f506177;
+  p:first-child {
+    width: 98px;
+  }
+  p:nth-child(3) {
+    width: 52px;
+  }
+}
+
+.basketPageContainer {
+  position: relative;
+  span {
+    opacity: 0.8;
+    place-self: flex-start;
+  }
+  article {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff75;
+    border-radius: 5px;
+    padding: 1rem;
+
+    div {
+      display: flex;
+      gap: 3rem;
+      padding: 0 1rem 1rem;
+    }
+    button {
+      place-self: end;
+    }
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .landingHeader {
+    padding: 10rem 0;
+  }
+  nav a {
+    font-size: 1.5rem;
+  }
+  .logo {
+    font-size: 4rem;
+  }
+  span.logo {
+    font-size: 7rem;
+  }
+  .primaryCTA {
+    padding: 0.5rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .logo {
+    font-size: 2rem;
+  }
+  span.logo {
+    font-size: 4rem;
+  }
+  .opacityContainer {
+    height: fit-content;
+  }
+  #welcomeImageBackground {
+    background-size: cover;
+    height: fit-content;
+    #countdownContainer *:first-child {
+      font-size: 4rem;
+    }
+    h3 {
+      word-spacing: 20px;
+    }
+  }
+  .basketContainer {
+    padding: 0;
+    margin-top: 100px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+  .landingHeader {
+    padding: 3rem 0;
+  }
+  #welcomeImageBackground {
+    nav ul {
+      padding: 1rem;
+    }
+  }
+  nav ul {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .basketContainer section {
+    display: block;
+  }
+  .sumContainer {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+  }
+
+  .toggleContainer {
+    transform: scale(0.8);
+  }
+  .schedules {
+    gap: 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  span.logo {
+    font-size: 3rem;
+  }
+  #welcomeImageBackground {
+    height: fit-content;
+    #countdownContainer *:first-child {
+      font-size: 2rem;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+  }
+  .basketContainer section {
+    padding: 0.5rem;
+  }
+  .basketContainer section .personalData div input,
+  .basketContainer section fieldset input {
+    width: 250px;
+  }
+  .basketContainer ul {
+    justify-content: flex-start;
+  }
+  .basketContainer .chooseTentContainer {
+    padding: 0;
+  }
+  .stepTitle {
+    margin: 1rem 0;
+  }
+  .toggleContainer .switch-button {
+    padding-right: 150px;
+    font-size: 15px;
+  }
+  .toggleContainer .switch-button:before {
+    padding-right: 25px;
+    justify-content: flex-end;
+  }
+  .schedules {
+    gap: 2rem;
+  }
+}
+//accomodation table
+.campingAvailability {
+  text-align: center;
+  padding: 3rem 0 1rem 0;
+}
+table {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 25px;
+  padding: 0.5rem;
+  margin: 1rem auto 0 auto;
+}
+
+tr {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: left;
+}
+th {
+  white-space: nowrap;
+  text-align: right;
+  margin: 0.5rem 1rem;
+  font-weight: 600;
+}
+td {
+  margin: 0.5rem;
+  text-align: left;
+  width: 87px;
+}
+#radioCampsites {
+  width: 15px;
+}
