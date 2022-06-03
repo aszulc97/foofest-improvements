@@ -1,5 +1,5 @@
 import Nav from "../components/Nav";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import BandCard from "../components/BandCard";
 import BandPopUp from "../components/BandPopUp";
 import Footer from "../components/Footer";
@@ -21,6 +21,9 @@ export default function SchedulePage(props) {
   const [popUpBand, setPopUpBand] = useState({});
   const [hideInfo, setHideInfo] = useState(false);
 
+  const daysButtons = useRef();
+  const stagesButtons = useRef();
+
   useEffect(() => {
     fetch("https://foofest2022.herokuapp.com/schedule")
       .then((response) => response.json())
@@ -29,6 +32,11 @@ export default function SchedulePage(props) {
         setVanaheim(data.Vanaheim);
         setJotunheim(data.Jotunheim);
       });
+    daysButtons.current.elements["dayall"].checked = true;
+    stagesButtons.current.elements["stageall"].checked = true;
+    filterByDay("all");
+    filterByStage("all");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function filterByDay(day) {
@@ -96,7 +104,7 @@ export default function SchedulePage(props) {
       <h1>SCHEDULE</h1>
       {!hideInfo && <p className="styledPar">Choose a day to see schedules</p>}
       <div className="scheduleButtons">
-        <div className="daysButtons">
+        <form className="daysButtons" ref={daysButtons}>
           <RadioButton
             number={"all"}
             name={"day"}
@@ -163,8 +171,8 @@ export default function SchedulePage(props) {
               labelBottom={"(16/07)"}
             />
           </div>
-        </div>
-        <div className="stagesButtons">
+        </form>
+        <form className="stagesButtons" ref={stagesButtons}>
           <RadioButton
             number={"all"}
             name={"stage"}
@@ -200,7 +208,7 @@ export default function SchedulePage(props) {
             labelBottom={"JOTUNHEIM"}
             color="#ffad7d"
           />
-        </div>
+        </form>
 
         <select name="day" id="daysDropdown" onChange={handleDaysDropdownChange}>
           <option value="all">All days</option>
