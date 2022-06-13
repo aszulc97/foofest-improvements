@@ -32,9 +32,8 @@ export default function SchedulePage(props) {
         setVanaheim(data.Vanaheim);
         setJotunheim(data.Jotunheim);
       });
-    daysButtons.current.elements["dayall"].checked = true;
+    // daysButtons.current.elements["dayall"].checked = true;
     stagesButtons.current.elements["stageall"].checked = true;
-    filterByDay("all");
     filterByStage("all");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
