@@ -20,6 +20,32 @@ export default function SchedulePage(props) {
   const [hiddenPopUp, setHiddenPopUp] = useState(true);
   const [popUpBand, setPopUpBand] = useState({});
   const [hideInfo, setHideInfo] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
+
+  function handleSearch(e) {
+    setSearchInput(e.target.value.toLowerCase());
+    //if (searchInput !== "") setHideSchedules(true);
+    // else setHideSchedules(false);
+  }
+
+  const filteredM = displayedM.filter((el) => {
+    if (searchInput === "") return el;
+    else return el.act.toLowerCase().includes(searchInput);
+  });
+
+  const filteredV = displayedV.filter((el) => {
+    if (searchInput === "") return el;
+    else return el.act.toLowerCase().includes(searchInput);
+  });
+
+  const filteredJ = displayedJ.filter((el) => {
+    if (searchInput === "") return el;
+    else return el.act.toLowerCase().includes(searchInput);
+  });
+
+  useEffect(() => {
+    if (filteredM.length === 0) console.log("hey");
+  }, [filteredM, filteredV, filteredJ]);
 
   const daysButtons = useRef();
   const stagesButtons = useRef();
@@ -226,6 +252,7 @@ export default function SchedulePage(props) {
           <option value="jotunheim">Stage 3 JOTUNHEIM</option>
         </select>
       </div>
+      <input type="text" onChange={handleSearch} placeholder="Search " />
       <div className="schedules">
         {!hideM && !hideSchedules && (
           <Schedule
@@ -263,7 +290,7 @@ export default function SchedulePage(props) {
       <div className="artistsList">
         {!hideM && (
           <>
-            {displayedM.map((item) =>
+            {filteredM.map((item) =>
               item.act !== "break" ? (
                 <BandCard
                   key={item.act}
@@ -277,7 +304,7 @@ export default function SchedulePage(props) {
         )}
         {!hideV && (
           <>
-            {displayedV.map((item) =>
+            {filteredV.map((item) =>
               item.act !== "break" ? (
                 <BandCard
                   key={item.act}
@@ -291,7 +318,7 @@ export default function SchedulePage(props) {
         )}
         {!hideJ && (
           <>
-            {displayedJ.map((item) =>
+            {filteredJ.map((item) =>
               item.act !== "break" ? (
                 <BandCard
                   key={item.act}
