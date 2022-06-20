@@ -44,7 +44,12 @@ export default function SchedulePage(props) {
   });
 
   useEffect(() => {
-    if (filteredM.length === 0) console.log("hey");
+    if (filteredM.length === 0) setHideM(true);
+    else setHideM(false);
+    if (filteredV.length === 0) setHideV(true);
+    else setHideV(false);
+    if (filteredJ.length === 0) setHideJ(true);
+    else setHideJ(false);
   }, [filteredM, filteredV, filteredJ]);
 
   const daysButtons = useRef();
@@ -251,8 +256,21 @@ export default function SchedulePage(props) {
           <option value="vanaheim">Stage 2 VANAHEIM</option>
           <option value="jotunheim">Stage 3 JOTUNHEIM</option>
         </select>
+        <div className="search">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="13"
+          height="13"
+          fill="currentColor"
+          className="bi bi-search"
+          viewBox="0 0 16 16"
+        >
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+        </svg>
+        <input type="text" onChange={handleSearch} placeholder="Search " />
       </div>
-      <input type="text" onChange={handleSearch} placeholder="Search " />
+      </div>
+      
       <div className="schedules">
         {!hideM && !hideSchedules && (
           <Schedule

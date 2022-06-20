@@ -634,24 +634,26 @@ h1 {
 }
 
 //FAQ
+.search {
+  align-self: flex-end;
+  margin: 1rem 0;
+  border: 0.5px solid base.$primary-color;
+  border-radius: 25px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  input {
+    all: unset;
+  }
+  svg {
+    margin: 0.2rem 0.5rem 0.2rem 0.2rem;
+  }
+}
+
 .questionsContainer {
   width: 60%;
   margin: 0 auto;
-  .search {
-    align-self: flex-end;
-    margin: 1rem 0;
-    border: 0.5px solid base.$primary-color;
-    border-radius: 25px;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    input {
-      all: unset;
-    }
-    svg {
-      margin: 0.2rem 0.5rem 0.2rem 0.2rem;
-    }
-  }
+  
 }
 
 .singleQuestion {
