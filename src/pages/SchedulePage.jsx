@@ -30,17 +30,17 @@ export default function SchedulePage(props) {
 
   const filteredM = displayedM.filter((el) => {
     if (searchInput === "") return el;
-    else return el.act.toLowerCase().includes(searchInput);
+    else return el.act!=="break" ? el.act.toLowerCase().includes(searchInput):null;
   });
 
   const filteredV = displayedV.filter((el) => {
     if (searchInput === "") return el;
-    else return el.act.toLowerCase().includes(searchInput);
+    else return  el.act!=="break" ? el.act.toLowerCase().includes(searchInput):null;
   });
 
   const filteredJ = displayedJ.filter((el) => {
     if (searchInput === "") return el;
-    else return el.act.toLowerCase().includes(searchInput);
+    else return el.act!=="break" ? el.act.toLowerCase().includes(searchInput):null;
   });
 
   useEffect(() => {
@@ -50,7 +50,8 @@ export default function SchedulePage(props) {
     else setHideV(false);
     if (filteredJ.length === 0) setHideJ(true);
     else setHideJ(false);
-  }, [filteredM, filteredV, filteredJ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchInput]);
 
   const daysButtons = useRef();
   const stagesButtons = useRef();
@@ -92,6 +93,7 @@ export default function SchedulePage(props) {
   }
 
   function filterByStage(stage) {
+    console.log(stage)
     if (stage === "midgard") {
       setHideM(false);
       setHideV(true);
@@ -280,6 +282,7 @@ export default function SchedulePage(props) {
             stageNumber="1"
             stageName="MIDGARD"
             color="#e4a3c8"
+            searchInput={searchInput}
           ></Schedule>
         )}
         {!hideV && !hideSchedules && (
@@ -290,6 +293,7 @@ export default function SchedulePage(props) {
             stageNumber="2"
             stageName="VANAHEIM"
             color="#7cc7cf"
+            searchInput={searchInput}
           ></Schedule>
         )}
         {!hideJ && !hideSchedules && (
@@ -300,6 +304,7 @@ export default function SchedulePage(props) {
             stageNumber="3"
             stageName="JOTUNHEIM"
             color="#ffad7d"
+            searchInput={searchInput}
           ></Schedule>
         )}
       </div>

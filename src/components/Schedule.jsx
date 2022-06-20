@@ -21,7 +21,7 @@ export default function Schedule(props) {
       >
         <div>
           <span className={`${item.cancelled ? "cancelled" : null} time} `}>{item.start}</span>{" "}
-          <p className={`${item.cancelled ? "cancelled" : null}`}>{item.act}</p>
+          <p className={`${item.cancelled ? "cancelled" : null}`} style={item.act.toLowerCase().includes(props.searchInput) && props.searchInput!=="" &&item.act!=="break" ? {backgroundColor:"#ffff99"} : null}>{item.act}</p>
           {item.cancelled && <p className="cancelledText">CANCELLED</p>}
         </div>
       </li>
