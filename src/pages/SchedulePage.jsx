@@ -30,17 +30,26 @@ export default function SchedulePage(props) {
 
   const filteredM = displayedM.filter((el) => {
     if (searchInput === "") return el;
-    else return el.act!=="break" ? el.act.toLowerCase().includes(searchInput):null;
+    else
+      return el.act !== "break"
+        ? el.act.toLowerCase().includes(searchInput)
+        : null;
   });
 
   const filteredV = displayedV.filter((el) => {
     if (searchInput === "") return el;
-    else return  el.act!=="break" ? el.act.toLowerCase().includes(searchInput):null;
+    else
+      return el.act !== "break"
+        ? el.act.toLowerCase().includes(searchInput)
+        : null;
   });
 
   const filteredJ = displayedJ.filter((el) => {
     if (searchInput === "") return el;
-    else return el.act!=="break" ? el.act.toLowerCase().includes(searchInput):null;
+    else
+      return el.act !== "break"
+        ? el.act.toLowerCase().includes(searchInput)
+        : null;
   });
 
   useEffect(() => {
@@ -60,40 +69,93 @@ export default function SchedulePage(props) {
     fetch("https://foofest2022.herokuapp.com/schedule")
       .then((response) => response.json())
       .then((data) => {
-        setMidgard(data.Midgard);
-        setVanaheim(data.Vanaheim);
-        setJotunheim(data.Jotunheim);
-      });
+        // setMidgard(data.Midgard);
+        // setVanaheim(data.Vanaheim);
+        // setJotunheim(data.Jotunheim);
+      
+
+      let temp = [];
+      Object.keys(data.Midgard).map((key) =>
+        data.Midgard[key].map((item) => {
+          let pair = { day: key };
+          return temp.push({ ...item, ...pair });
+        })
+      );
+      setMidgard(temp);
+  
+      temp = []
+      Object.keys(data.Vanaheim).map((key) =>
+        data.Vanaheim[key].map((item) => {
+          let pair = { day: key };
+          return temp.push({ ...item, ...pair });
+        })
+      );
+      setVanaheim(temp);
+  
+      temp = []
+      Object.keys(data.Jotunheim).map((key) =>
+        data.Jotunheim[key].map((item) => {
+          let pair = { day: key };
+          return temp.push({ ...item, ...pair });
+        })
+      );
+      setJotunheim(temp);
+
+    });
     // daysButtons.current.elements["dayall"].checked = true;
     stagesButtons.current.elements["stageall"].checked = true;
     filterByStage("all");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // useEffect(() => {
+  //   let temp = [];
+  //   Object.keys(midgard).map((key) =>
+  //     midgard[key].map((item) => {
+  //       let pair = { day: key };
+  //       return temp.push({ ...item, ...pair });
+  //     })
+  //   );
+  //   setMidgard(temp);
+
+  //   temp = []
+  //   Object.keys(vanaheim).map((key) =>
+  //     vanaheim[key].map((item) => {
+  //       let pair = { day: key };
+  //       return temp.push({ ...item, ...pair });
+  //     })
+  //   );
+  //   setVanaheim(temp);
+
+  //   temp = []
+  //   Object.keys(jotunheim).map((key) =>
+  //     jotunheim[key].map((item) => {
+  //       let pair = { day: key };
+  //       return temp.push({ ...item, ...pair });
+  //     })
+  //   );
+  //   setJotunheim(temp);
+  // }, []);
+
   function filterByDay(day) {
     if (day === "all") {
       setHideSchedules(true);
-      let alldays = [];
-      Object.keys(midgard).map((key) => midgard[key].map((item) => alldays.push(item)));
-      setDisplayedM(alldays);
-      alldays = [];
-      Object.keys(vanaheim).map((key) => vanaheim[key].map((item) => alldays.push(item)));
-      setDisplayedV(alldays);
-      alldays = [];
-      Object.keys(jotunheim).map((key) => jotunheim[key].map((item) => alldays.push(item)));
-      setDisplayedJ(alldays);
+      setDisplayedM(midgard);
+      setDisplayedV(vanaheim);
+      setDisplayedJ(jotunheim);
+
       setHideInfo(false);
     } else {
       setHideSchedules(false);
-      setDisplayedJ(jotunheim[day]);
-      setDisplayedM(midgard[day]);
-      setDisplayedV(vanaheim[day]);
+      setDisplayedM(midgard.filter((item)=>item.day===day));
+      setDisplayedV(vanaheim.filter((item)=>item.day===day));
+      setDisplayedJ(jotunheim.filter((item)=>item.day===day));
       setHideInfo(true);
     }
   }
 
   function filterByStage(stage) {
-    console.log(stage)
+    console.log(stage);
     if (stage === "midgard") {
       setHideM(false);
       setHideV(true);
@@ -242,7 +304,11 @@ export default function SchedulePage(props) {
           />
         </form>
 
-        <select name="day" id="daysDropdown" onChange={handleDaysDropdownChange}>
+        <select
+          name="day"
+          id="daysDropdown"
+          onChange={handleDaysDropdownChange}
+        >
           <option value="all">All days</option>
           <option value="mon">Day 1 (10/07)</option>
           <option value="tue">Day 2 (11/07)</option>
@@ -252,27 +318,31 @@ export default function SchedulePage(props) {
           <option value="say">Day 6 (15/07)</option>
           <option value="sun">Day 7 (16/07)</option>
         </select>
-        <select name="stage" id="stagesDropdown" onChange={handleStagesDropdownChange}>
+        <select
+          name="stage"
+          id="stagesDropdown"
+          onChange={handleStagesDropdownChange}
+        >
           <option value="all">All stages</option>
           <option value="midgard">Stage 1 MIDGARD</option>
           <option value="vanaheim">Stage 2 VANAHEIM</option>
           <option value="jotunheim">Stage 3 JOTUNHEIM</option>
         </select>
         <div className="search">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="13"
-          height="13"
-          fill="currentColor"
-          className="bi bi-search"
-          viewBox="0 0 16 16"
-        >
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-        </svg>
-        <input type="text" onChange={handleSearch} placeholder="Search " />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="13"
+            height="13"
+            fill="currentColor"
+            className="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+          </svg>
+          <input type="text" onChange={handleSearch} placeholder="Search " />
+        </div>
       </div>
-      </div>
-      
+
       <div className="schedules">
         {!hideM && !hideSchedules && (
           <Schedule
