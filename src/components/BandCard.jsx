@@ -1,8 +1,13 @@
 export default function BandCard(props) {
   let logoUrl = "";
-
   function handleClick() {
-    props.showPopUpFunction(props.band);
+    let info ={
+      band: props.band,
+      stage: props.stage,
+      time: props.time,
+      day: props.day,
+    }
+    props.showPopUpFunction(info);
   }
 
   function handleLogo(logoString) {

@@ -28,8 +28,13 @@ export default function Schedule(props) {
     );
 
     function displayPopUp() {
-      props.showPopup(props.bands.find((band) => band.name === item.act));
-    }
+      let info ={
+        band: props.bands.find((band) => band.name === item.act),
+        stage: props.stageName,
+        time: item.start,
+        day: item.day,
+      }
+      props.showPopup(info)    }
   }
 
   return (
@@ -49,7 +54,7 @@ export default function Schedule(props) {
         </svg>
         <div className="stageHeader">
           <p>Stage {props.stageNumber}</p>
-          <h3>{props.stageName}</h3>
+          <h3>{props.stageName.toUpperCase()}</h3>
         </div>
       </div>
       <ul className="sessions">{props.displayed.map((item) => displaySchedule(item))}</ul>

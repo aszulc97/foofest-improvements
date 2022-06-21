@@ -24,8 +24,6 @@ export default function SchedulePage(props) {
 
   function handleSearch(e) {
     setSearchInput(e.target.value.toLowerCase());
-    //if (searchInput !== "") setHideSchedules(true);
-    // else setHideSchedules(false);
   }
 
   const filteredM = displayedM.filter((el) => {
@@ -69,11 +67,6 @@ export default function SchedulePage(props) {
     fetch("https://foofest2022.herokuapp.com/schedule")
       .then((response) => response.json())
       .then((data) => {
-        // setMidgard(data.Midgard);
-        // setVanaheim(data.Vanaheim);
-        // setJotunheim(data.Jotunheim);
-      
-
       let temp = [];
       Object.keys(data.Midgard).map((key) =>
         data.Midgard[key].map((item) => {
@@ -102,40 +95,10 @@ export default function SchedulePage(props) {
       setJotunheim(temp);
 
     });
-    // daysButtons.current.elements["dayall"].checked = true;
     stagesButtons.current.elements["stageall"].checked = true;
     filterByStage("all");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   let temp = [];
-  //   Object.keys(midgard).map((key) =>
-  //     midgard[key].map((item) => {
-  //       let pair = { day: key };
-  //       return temp.push({ ...item, ...pair });
-  //     })
-  //   );
-  //   setMidgard(temp);
-
-  //   temp = []
-  //   Object.keys(vanaheim).map((key) =>
-  //     vanaheim[key].map((item) => {
-  //       let pair = { day: key };
-  //       return temp.push({ ...item, ...pair });
-  //     })
-  //   );
-  //   setVanaheim(temp);
-
-  //   temp = []
-  //   Object.keys(jotunheim).map((key) =>
-  //     jotunheim[key].map((item) => {
-  //       let pair = { day: key };
-  //       return temp.push({ ...item, ...pair });
-  //     })
-  //   );
-  //   setJotunheim(temp);
-  // }, []);
 
   function filterByDay(day) {
     if (day === "all") {
@@ -143,8 +106,8 @@ export default function SchedulePage(props) {
       setDisplayedM(midgard);
       setDisplayedV(vanaheim);
       setDisplayedJ(jotunheim);
-
       setHideInfo(false);
+      console.log(midgard);
     } else {
       setHideSchedules(false);
       setDisplayedM(midgard.filter((item)=>item.day===day));
@@ -176,6 +139,7 @@ export default function SchedulePage(props) {
   }
 
   function showPopup(props) {
+    console.log(props);
     setHiddenPopUp(false);
     setPopUpBand(props);
   }
@@ -350,7 +314,7 @@ export default function SchedulePage(props) {
             displayed={displayedM}
             showPopup={showPopup}
             stageNumber="1"
-            stageName="MIDGARD"
+            stageName="midgard"
             color="#e4a3c8"
             searchInput={searchInput}
           ></Schedule>
@@ -361,7 +325,7 @@ export default function SchedulePage(props) {
             displayed={displayedV}
             showPopup={showPopup}
             stageNumber="2"
-            stageName="VANAHEIM"
+            stageName="vanaheim"
             color="#7cc7cf"
             searchInput={searchInput}
           ></Schedule>
@@ -372,7 +336,7 @@ export default function SchedulePage(props) {
             displayed={displayedJ}
             showPopup={showPopup}
             stageNumber="3"
-            stageName="JOTUNHEIM"
+            stageName="jotunheim"
             color="#ffad7d"
             searchInput={searchInput}
           ></Schedule>
@@ -388,6 +352,8 @@ export default function SchedulePage(props) {
                 <BandCard
                   key={item.act}
                   stage={"midgard"}
+                  time={item.start}
+                  day={item.day}
                   showPopUpFunction={showPopup}
                   band={props.bands.find((band) => band.name === item.act)}
                 />
@@ -402,6 +368,8 @@ export default function SchedulePage(props) {
                 <BandCard
                   key={item.act}
                   stage={"vanaheim"}
+                  time={item.start}
+                  day={item.day}
                   showPopUpFunction={showPopup}
                   band={props.bands.find((band) => band.name === item.act)}
                 />
@@ -416,6 +384,8 @@ export default function SchedulePage(props) {
                 <BandCard
                   key={item.act}
                   stage={"jotunheim"}
+                  time={item.start}
+                  day={item.day}
                   showPopUpFunction={showPopup}
                   band={props.bands.find((band) => band.name === item.act)}
                 />

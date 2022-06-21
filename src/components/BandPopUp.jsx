@@ -2,7 +2,6 @@ import { useState } from "react";
 
 export default function BandPopUp(props) {
   const [readMore, setReadMore] = useState(false);
-
   let logoUrl = "";
   function handleClose() {
     props.hidePopUp();
@@ -19,12 +18,12 @@ export default function BandPopUp(props) {
       return "https://foofest2022.herokuapp.com/logos/" + logoString;
     }
   }
-  logoUrl = handleLogo(props.band.logo);
+  logoUrl = handleLogo(props.band.band.logo);
 
   return (
     <div className="popUpContainer">
       <div className="popUp">
-        <img src={logoUrl} alt={props.band.name} />
+        <img src={logoUrl} alt={props.band.band.name} />
         <button className="closeButton" onClick={handleClose}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -39,18 +38,26 @@ export default function BandPopUp(props) {
         </button>
         <div>
           <div className="popUpName">
-            <h2>{props.band.name}</h2>
-            <h5>Genre: {props.band.genre}</h5>
+            <h2>{props.band.band.name}</h2>
+            <h5>Genre: {props.band.band.genre}</h5>
           </div>
-          <h4 className="members">{props.band.members.join(", ")}</h4>
+          <div className="concertInfo">
+            
+            <h6>{props.band.day.charAt(0).toUpperCase()+props.band.day.slice(1)}</h6>
+            <h6>at {props.band.time}</h6>  
+            <h6>{props.band.stage.toUpperCase()}</h6>
+          </div>
+          <h4 className="members">{props.band.band.members.join(", ")}</h4>
           <div className="bioP">
-            <p>{props.band.bio.substring(0, props.band.bio.indexOf(".") + 1)}</p>
-            <p style={!readMore ? { display: "none" } : null}> {props.band.bio.substring(props.band.bio.indexOf(".") + 1)}</p>
+            <p>{props.band.band.bio.substring(0, props.band.band.bio.indexOf(".") + 1)}</p>
+            <p style={!readMore ? { display: "none" } : null}> {props.band.band.bio.substring(props.band.band.bio.indexOf(".") + 1)}</p>
             <button className="readMore" onClick={showReadMore}>
               {readMore ? "Show less" : "Read more"}
             </button>
           </div>
-          {props.band.logoCredits && <p className="logoCredits">Image Source:{props.band.logoCredits}</p>}
+
+
+          {props.band.band.logoCredits && <p className="logoCredits">Image Source:{props.band.band.logoCredits}</p>}
         </div>
       </div>
     </div>
