@@ -118,7 +118,6 @@ export default function SchedulePage(props) {
   }
 
   function filterByStage(stage) {
-    console.log(stage);
     if (stage === "midgard") {
       setHideM(false);
       setHideV(true);
@@ -139,7 +138,6 @@ export default function SchedulePage(props) {
   }
 
   function showPopup(props) {
-    console.log(props);
     setHiddenPopUp(false);
     setPopUpBand(props);
   }
