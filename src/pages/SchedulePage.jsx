@@ -26,28 +26,21 @@ export default function SchedulePage(props) {
     setSearchInput(e.target.value.toLowerCase());
   }
 
+  console.log("hi");
+
   const filteredM = displayedM.filter((el) => {
     if (searchInput === "") return el;
-    else
-      return el.act !== "break"
-        ? el.act.toLowerCase().includes(searchInput)
-        : null;
+    else return el.act !== "break" ? el.act.toLowerCase().includes(searchInput) : null;
   });
 
   const filteredV = displayedV.filter((el) => {
     if (searchInput === "") return el;
-    else
-      return el.act !== "break"
-        ? el.act.toLowerCase().includes(searchInput)
-        : null;
+    else return el.act !== "break" ? el.act.toLowerCase().includes(searchInput) : null;
   });
 
   const filteredJ = displayedJ.filter((el) => {
     if (searchInput === "") return el;
-    else
-      return el.act !== "break"
-        ? el.act.toLowerCase().includes(searchInput)
-        : null;
+    else return el.act !== "break" ? el.act.toLowerCase().includes(searchInput) : null;
   });
 
   useEffect(() => {
@@ -58,7 +51,7 @@ export default function SchedulePage(props) {
     if (filteredJ.length === 0) setHideJ(true);
     else setHideJ(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchInput]);
+  }, [searchInput, displayedM, displayedV, displayedJ]);
 
   const daysButtons = useRef();
   const stagesButtons = useRef();
@@ -67,34 +60,33 @@ export default function SchedulePage(props) {
     fetch("https://foofest2022.herokuapp.com/schedule")
       .then((response) => response.json())
       .then((data) => {
-      let temp = [];
-      Object.keys(data.Midgard).map((key) =>
-        data.Midgard[key].map((item) => {
-          let pair = { day: key };
-          return temp.push({ ...item, ...pair });
-        })
-      );
-      setMidgard(temp);
-  
-      temp = []
-      Object.keys(data.Vanaheim).map((key) =>
-        data.Vanaheim[key].map((item) => {
-          let pair = { day: key };
-          return temp.push({ ...item, ...pair });
-        })
-      );
-      setVanaheim(temp);
-  
-      temp = []
-      Object.keys(data.Jotunheim).map((key) =>
-        data.Jotunheim[key].map((item) => {
-          let pair = { day: key };
-          return temp.push({ ...item, ...pair });
-        })
-      );
-      setJotunheim(temp);
+        let temp = [];
+        Object.keys(data.Midgard).map((key) =>
+          data.Midgard[key].map((item) => {
+            let pair = { day: key };
+            return temp.push({ ...item, ...pair });
+          })
+        );
+        setMidgard(temp);
 
-    });
+        temp = [];
+        Object.keys(data.Vanaheim).map((key) =>
+          data.Vanaheim[key].map((item) => {
+            let pair = { day: key };
+            return temp.push({ ...item, ...pair });
+          })
+        );
+        setVanaheim(temp);
+
+        temp = [];
+        Object.keys(data.Jotunheim).map((key) =>
+          data.Jotunheim[key].map((item) => {
+            let pair = { day: key };
+            return temp.push({ ...item, ...pair });
+          })
+        );
+        setJotunheim(temp);
+      });
     stagesButtons.current.elements["stageall"].checked = true;
     filterByStage("all");
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -110,9 +102,9 @@ export default function SchedulePage(props) {
       console.log(midgard);
     } else {
       setHideSchedules(false);
-      setDisplayedM(midgard.filter((item)=>item.day===day));
-      setDisplayedV(vanaheim.filter((item)=>item.day===day));
-      setDisplayedJ(jotunheim.filter((item)=>item.day===day));
+      setDisplayedM(midgard.filter((item) => item.day === day));
+      setDisplayedV(vanaheim.filter((item) => item.day === day));
+      setDisplayedJ(jotunheim.filter((item) => item.day === day));
       setHideInfo(true);
     }
   }
@@ -266,11 +258,7 @@ export default function SchedulePage(props) {
           />
         </form>
 
-        <select
-          name="day"
-          id="daysDropdown"
-          onChange={handleDaysDropdownChange}
-        >
+        <select name="day" id="daysDropdown" onChange={handleDaysDropdownChange}>
           <option value="all">All days</option>
           <option value="mon">Day 1 (10/07)</option>
           <option value="tue">Day 2 (11/07)</option>
@@ -280,11 +268,7 @@ export default function SchedulePage(props) {
           <option value="say">Day 6 (15/07)</option>
           <option value="sun">Day 7 (16/07)</option>
         </select>
-        <select
-          name="stage"
-          id="stagesDropdown"
-          onChange={handleStagesDropdownChange}
-        >
+        <select name="stage" id="stagesDropdown" onChange={handleStagesDropdownChange}>
           <option value="all">All stages</option>
           <option value="midgard">Stage 1 MIDGARD</option>
           <option value="vanaheim">Stage 2 VANAHEIM</option>
