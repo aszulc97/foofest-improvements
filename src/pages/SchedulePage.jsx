@@ -26,8 +26,6 @@ export default function SchedulePage(props) {
     setSearchInput(e.target.value.toLowerCase());
   }
 
-  console.log("hi");
-
   const filteredM = displayedM.filter((el) => {
     if (searchInput === "") return el;
     else return el.act !== "break" ? el.act.toLowerCase().includes(searchInput) : null;
@@ -99,7 +97,6 @@ export default function SchedulePage(props) {
       setDisplayedV(vanaheim);
       setDisplayedJ(jotunheim);
       setHideInfo(false);
-      console.log(midgard);
     } else {
       setHideSchedules(false);
       setDisplayedM(midgard.filter((item) => item.day === day));
